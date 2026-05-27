@@ -64,7 +64,7 @@ This repository contains practice codes, implementations, and problem-solving ap
 ```bash
 DSA-Journey/
 │
-├── Linked_List/
+├── LinkedList/
 │   ├── SinglyLinkedList.cpp
 │   └── DoublyLinkedList.cpp
 │
