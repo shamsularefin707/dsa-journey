@@ -57,6 +57,10 @@ This repository contains practice codes, implementations, and problem-solving ap
 - isEmpty
 - Dynamic Memory Allocation
 
+### Stack Applications
+- Infix to Postfix Conversion
+- Postfix Expression Evaluation
+
 ---
 
 # Repository Structure
@@ -70,7 +74,9 @@ DSA-Journey/
 │
 ├── Stack/
 │   ├── StackUsingArray.cpp
-│   └── StackUsingLinkedList.cpp
+│   ├── StackUsingLinkedList.cpp
+│   ├── InfixToPostfix.cpp
+│   └── PostfixEvaluation.cpp
 │
 ├── Queue/
 ├── Trees/
@@ -79,56 +85,3 @@ DSA-Journey/
 ├── Searching/
 │
 └── README.md
-```
-
----
-
-# Current Progress
-
-- [x] Singly Linked List
-- [x] Doubly Linked List
-- [x] Stack Basics
-- [ ] Queue
-- [ ] Trees
-- [ ] Graphs
-- [ ] Heap
-- [ ] Hashing
-- [ ] Dynamic Programming
-
----
-
-# Learning Goals
-
-- Build strong DSA fundamentals
-- Improve problem-solving skills
-- Practice clean and structured coding
-- Prepare for technical interviews
-- Document learning progress consistently
-
----
-
-# Notes
-
-- This repository is continuously updated as I learn new topics.
-- Some implementations are written for academic understanding and practice purposes.
-- Binary Search on Linked List is implemented for conceptual learning, although arrays are generally more efficient for binary search due to random access capability.
-
----
-
-# Future Plans
-
-- Queue Implementations
-- Circular Linked List
-- Trees and BST
-- AVL Trees
-- Graph Algorithms
-- Dynamic Programming
-- STL Implementations
-- Competitive Programming Problems
-
----
-
-# Author
-
-Shamsul Arefin  
-BSSE Student | Learning DSA step by step
