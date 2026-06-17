@@ -63,22 +63,41 @@ This repository contains practice codes, implementations, and problem-solving ap
 
 ---
 
+## Queue
+
+### Queue using Array
+- Linear Queue (Enqueue, Dequeue, Peek, Traversal)
+- Circular Queue (Push, Pop, Peek, Modular Arithmetic Optimization)
+
+---
+
 # Repository Structure
 
 ```bash
 DSA-Journey/
 │
 ├── LinkedList/
+│   ├── README.md
 │   ├── SinglyLinkedList.cpp
 │   └── DoublyLinkedList.cpp
 │
 ├── Stack/
+│   ├── README.md
 │   ├── StackUsingArray.cpp
 │   ├── StackUsingLinkedList.cpp
 │   ├── InfixToPostfix.cpp
 │   └── PostfixEvaluation.cpp
 │
 ├── Queue/
+│   ├── README.md
+│   ├── LinearQueue_Array.cpp
+│   └── CircularQueue_Array.cpp
+│
+├── TowerOfHanoi/
+│   ├── README.md
+│   ├── TowerOfHanoi_1.cpp
+│   └── TowerOfHanoi_2.cpp
+│
 ├── Trees/
 ├── Graphs/
 ├── Sorting/
