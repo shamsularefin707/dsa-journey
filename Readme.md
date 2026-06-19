@@ -71,6 +71,15 @@ This repository contains practice codes, implementations, and problem-solving ap
 
 ---
 
+## Trees
+
+### Binary Trees
+- Manual Structural Object Tree Generation (Explicit Node Linking)
+- Dynamic Level-Order Traversal Processing Array Parser (using Queues)
+- Sideways Custom Console Tree Rendering
+
+---
+
 # Repository Structure
 
 ```bash
@@ -99,6 +108,10 @@ DSA-Journey/
 │   └── TowerOfHanoi_2.cpp
 │
 ├── Trees/
+│   ├── README.md
+│   ├── General_BinaryTree_1.cpp
+│   └── General_BinaryTree_2.cpp
+│
 ├── Graphs/
 ├── Sorting/
 ├── Searching/
