@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <queue>
 using namespace std;
 
 struct AVLNode{
@@ -97,6 +98,62 @@ AVLNode* insertAVL(AVLNode* node, int val){
     return node;
 }
 
+AVLNode* minValueNode(AVLNode* node){
+    AVLNode* curr = node;
+
+    while(curr->left) curr = curr->left;
+
+    return curr;
+}
+
+AVLNode* deleteAVL(AVLNode* root, int val){
+    if(!root) return root;
+
+    if(val < root->data){
+        root->left = deleteAVL(root->left, val);
+    }
+    else if(val > root->data){
+        root->right = deleteAVL(root->right, val);
+    }else{
+        if(!root->left || !root->right){
+            AVLNode* temp = root->left? root->left : root->right;
+
+            if(!temp){
+                temp = root;
+                root = nullptr;
+            }else{
+                *root = *temp; // Copy the contents of the non-empty child
+            }
+        }else{
+            AVLNode* temp = minValueNode(root->right);
+            root->data = temp->data;
+            root->right = deleteAVL(root->right, temp->data);
+        }
+    }
+
+    if(!root) return root;
+
+    updateHeight(root);
+    int balance = getBalance(root);
+
+    if(balance > 1 && getBalance(root->left) >= 0){ //Left-Left Case
+        return rightRotate(root);
+    }
+    if(balance < -1 && getBalance(root->right) <= 0){ //Right-Right Case
+        return leftRotate(root);
+    }
+    if(balance > 1 && getBalance(root->left) < 0){ //left-right case
+        root->left = leftRotate(root->left);
+        return rightRotate(root);
+    }
+    if(balance < -1 && getBalance(root-> right) >= 0){ //right-left case
+        root->right = rightRotate(root->right);
+        return leftRotate(root);
+    }
+
+    return root;
+}
+
 void printTreeVisual(AVLNode* root, int space = 0, int height = 5) {
     // Base case
     if (root == nullptr) return;
@@ -148,6 +205,22 @@ void postorderTraversal(AVLNode* root){
     cout << root->data << " ";
 }
 
+void levelOrderTraversal(AVLNode* root){
+    if(!root) return;
+
+    queue<AVLNode*> q;
+    q.push(root);
+
+    while(!q.empty()){
+        AVLNode* current = q.front();
+        q.pop();
+
+        cout << current->data << " ";
+
+        if(current->left) q.push(current->left);
+        if(current->right) q.push(current->right);
+    }
+}
 int main(){
     int values[] = {30, 20, 40, 10, 25, 80, 50, 90};
     int n = sizeof(values)/sizeof(values[0]);
@@ -156,7 +229,12 @@ int main(){
     for(int i = 0; i < n; i++){
         avlRoot = insertAVL(avlRoot, values[i]);
     }
+
     printTreeVisual(avlRoot); // Reusing the same print function for AVL tree
 
+    deleteAVL(avlRoot, 20);
+    cout << "\nAfter deleting 20:\n";
+    printTreeVisual(avlRoot);
+    
     return 0;
 }
