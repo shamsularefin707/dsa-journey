@@ -5,6 +5,13 @@ using namespace std;
 
 enum Color { RED, BLACK };
 
+struct BSTNode{
+    int data;
+    BSTNode* left,* right;
+
+    BSTNode(int val) : data(val), left(nullptr), right(nullptr){}
+};
+
 struct RBNode{
     int data;
     Color color;
@@ -286,21 +293,55 @@ class RBTree{
     }
 };
 
+void insertImbalancedTree(BSTNode*& root, int val){
+    if(root == nullptr){
+        root = new BSTNode(val);
+        return;
+    }
+    if(val < root->data){
+        insertImbalancedTree(root->left, val);
+    }else{
+        insertImbalancedTree(root->right, val);
+    }
+}
+
+void printImbalancedTree(BSTNode* node, string indent, bool last){
+    if(node != nullptr){
+        cout << indent;
+        if(last){
+            cout << "R----";
+            indent += "     ";
+        }else{
+            cout << "L----";
+            indent += "|    ";
+        }
+        cout << node->data << endl;
+        printImbalancedTree(node->left, indent, false);
+        printImbalancedTree(node->right, indent, true);
+    }
+}
 
 int main(){
     RBTree tree;
-    int arr[] = {10, 20, 30, 15, 25, 5, 1};
+    BSTNode* imbalancedRoot = nullptr;
+    int arr[] = {10, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 11};
+
+    for(int val : arr){
+        insertImbalancedTree(imbalancedRoot, val);
+    }
+    printImbalancedTree(imbalancedRoot, "", true);
+
     for(int val : arr){
         tree.insert(val);
     }
 
-    cout << "Red-Black Tree Visualization:" << endl;
+    cout << "\nRed-Black Tree Visualization:" << endl;
     tree.printTreeVisual(tree.root, "", true);
 
-    cout << "\nDeleting 20..." << endl;
-    tree.deleteNode(20);
+    cout << "\nDeleting 7..." << endl;
+    tree.deleteNode(7);
     cout << "Red-Black Tree Visualization after deletion:" << endl;
     tree.printTreeVisual(tree.root, "", true);
-    
+
     return 0;
 }
