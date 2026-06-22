@@ -105,10 +105,6 @@ class RBTree{
         root->color = BLACK;
     }
 
-    
-    
-
-
     void insert(int val){
         RBNode* z = new RBNode(val);
         z->color = RED;
@@ -142,6 +138,137 @@ class RBTree{
         insertFixup(z);
     }
 
+
+    RBNode* search(int val){
+        RBNode* curr = root;
+
+        while(curr != NIL && curr->data != val){
+            if(val < curr->data){
+                curr = curr->left;
+            }else{
+                curr = curr->right;
+            }
+        }
+        return curr;
+    }
+
+    RBNode* minimum(RBNode* node){
+        while(node->left != NIL){
+            node = node->left;
+        }
+        return node;
+    }
+
+    void transplant(RBNode* u, RBNode* v){
+        if(u->parent == NIL){
+            root = v;
+        }else if(u == u->parent->left){
+            u->parent->left = v;
+        }else{
+            u->parent->right = v;
+        }
+
+        if(v){
+            v->parent = u->parent;
+        }
+    }
+
+    void deleteFixup(RBNode* x){
+        while(x != root && x->color == BLACK){
+            if(x == x->parent->left){
+                RBNode* w = x->parent->right;
+
+                if(w->color == RED){ //Case 1: Sibling is RED}
+                    w->color = BLACK;
+                    x->parent->color = RED;
+                    leftRotate(x->parent);
+                    w = x->parent->right;
+                }
+                if(w->left->color == BLACK && w->right->color == BLACK){ //Case 2: Sibling is BLACK and both nephews are BLACK
+                    w->color = RED;
+                    x = x->parent;
+                }
+                else{ //Case 3: Sibling is BLACK and at least one nephew is RED
+                    if(w->right->color == BLACK){ //Case 3a : Sibling's right child is BLACK
+                        w->left->color = BLACK;
+                        w->color = RED;
+                        rightRotate(w);
+                        w = x->parent->right;
+                    }
+                    w->color = x->parent->color;
+                    x->parent->color = BLACK;
+                    w->right->color = BLACK;
+
+                    leftRotate(x->parent);
+                    x = root;
+                }
+            }else{
+                RBNode* w = x->parent->left;
+
+                if(w->color == RED){ //Case 1: Sibling is RED
+                    w->color = BLACK;
+                    x->parent->color = RED;
+                    rightRotate(x->parent);
+                    w = x->parent->left;
+                }
+                if(w->right->color == BLACK && w->left->color == BLACK){ //Case 2: Sibling is BLACK and both nephews are BLACK
+                    w->color = RED;
+                    x = x->parent;
+                }else{ //Case 3: Sibling is BLACK and at least one nephew is RED
+                    if(w->left->color == BLACK){ // Case 3a: Left nephew is BLACK
+                        w->right->color = BLACK;
+                        w->color = RED;
+                        leftRotate(w);
+                        w = x->parent->left;
+                    }
+                    w->color = x->parent->color;
+                    x->parent->color = BLACK;
+                    w->left->color = BLACK;
+
+                    rightRotate(x->parent);
+                    x = root;
+                }
+            }
+        }
+    }
+    void deleteNode(int val){
+        RBNode* z = search(val);
+        if(z == NIL){
+            return;
+        }
+
+        RBNode* y = z;
+        Color yOriginalColor = y->color;
+        RBNode* x;
+
+        if(z->left == NIL){
+            x = z->right;
+            transplant(z, z->right);
+        }
+        else if(z->right == NIL){
+            x = z->left;
+            transplant(z, z->left);
+        }else{
+            y = minimum(z->right);
+            yOriginalColor = y->color;
+            x = y->right;
+
+            if(y->parent != z){
+                transplant(y, y->right);
+                y->right = z->right;
+                y->right->parent = y;
+            }
+            transplant(z,y);
+            y->left = z->left;
+            y->left->parent = y;
+            y->color = z->color;
+        }
+
+        if(yOriginalColor == BLACK){
+            deleteFixup(x);
+        }
+    }
+
     void printTreeVisual(RBNode* node, string indent, bool last){
         if(node != NIL){
             cout << indent;
@@ -170,5 +297,10 @@ int main(){
     cout << "Red-Black Tree Visualization:" << endl;
     tree.printTreeVisual(tree.root, "", true);
 
+    cout << "\nDeleting 20..." << endl;
+    tree.deleteNode(20);
+    cout << "Red-Black Tree Visualization after deletion:" << endl;
+    tree.printTreeVisual(tree.root, "", true);
+    
     return 0;
 }
