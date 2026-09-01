@@ -1,0 +1,88 @@
+//Complexity Analysis of Algorithms
+//Analysis of algorithm O(n) via Counting Sort
+
+#include <iostream>
+#include <vector>
+#include <chrono>
+#include <iomanip>
+#include <random>
+using namespace std;
+
+// Function to perform Counting Sort on an array
+void countingSort(int arr[], int n) {
+    if (n <= 0) return;
+
+    // 1. Find min and max elements to handle positive/negative range
+    int minVal = arr[0];
+    int maxVal = arr[0];
+    for (int i = 1; i < n; ++i) {
+        if (arr[i] < minVal) minVal = arr[i];
+        if (arr[i] > maxVal) maxVal = arr[i];
+    }
+
+    int range = maxVal - minVal + 1;
+
+    // 2. Dynamic allocations for dynamic array sizes
+    int* count = new int[range](); // Initialized to 0
+    int* output = new int[n];
+
+    // 3. Store the frequency of each element
+    for (int i = 0; i < n; ++i) {
+        count[arr[i] - minVal]++;
+    }
+
+    // 4. Calculate cumulative counts (prefix sum)
+    for (int i = 1; i < range; ++i) {
+        count[i] += count[i - 1];
+    }
+
+    // 5. Build output array in reverse to preserve stability
+    for (int i = n - 1; i >= 0; --i) {
+        output[count[arr[i] - minVal] - 1] = arr[i];
+        count[arr[i] - minVal]--;
+    }
+
+    // 6. Copy sorted elements back into original array
+    for (int i = 0; i < n; ++i) {
+        arr[i] = output[i];
+    }
+
+    // Clean up dynamically allocated memory
+    delete[] count;
+    delete[] output;
+}
+
+int main() {
+    vector<int> sizes = {100, 1000, 10000, 50000, 100000, 500000,1000000, 5000000,10000000}; // Different input sizes
+    mt19937 rng(42); // Initialize random number generator
+    uniform_int_distribution<int> dist(-10000, 10000); // Range for random numbers
+
+    cout << left 
+         << setw(15) << "Input Size"
+         << setw(20) << "Time Taken (ms)"
+         << endl;
+
+    cout << string(35, '-') << endl;
+
+    for(int n: sizes){
+        vector<int> arr(n);
+        for(int i = 0; i < n; ++i){
+            arr[i] = dist(rng); // Fill array with random numbers
+        }
+
+        //Start measuring time
+        auto start = chrono::steady_clock::now();
+        countingSort(arr.data(), arr.size());
+        auto end = chrono::steady_clock::now();
+        //Stop measuring time
+
+        chrono::duration<double, std::milli> elapsed = end-start;
+
+        cout << left 
+             << setw(15) << n
+             << setw(20) << elapsed.count()
+             << endl;
+    }
+
+    return 0;
+}
