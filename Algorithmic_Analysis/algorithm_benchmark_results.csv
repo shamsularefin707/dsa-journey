@@ -1,0 +1,37 @@
+Algorithm,Input Size,Time,Notes / Additional Info
+Counting Sort,1000,0.369083 ms,
+Counting Sort,10000,0.686485 ms,
+Counting Sort,50000,2.927293 ms,
+Counting Sort,100000,5.418284 ms,
+Counting Sort,500000,26.6877 ms,
+Counting Sort,1000000,53.6255 ms,
+Counting Sort,5000000,340.377 ms,
+Counting Sort,10000000,708.241 ms,
+Tower Of Hanoi,20,19.5521 ms,1048575 steps
+Tower Of Hanoi,25,664.7165 ms,33554431 steps
+Tower Of Hanoi,35,Skipped (>25),3.436e+10 steps
+Tower Of Hanoi,40,Skipped (>25),1.100e+12 steps
+Tower Of Hanoi,45,Skipped (>25),3.518e+13 steps
+Tower Of Hanoi,50,Skipped (>25),1.126e+15 steps
+Tower Of Hanoi,100,Skipped (>25),1.268e+30 steps
+Tower Of Hanoi,10000,Skipped (>25),inf steps
+Merge Sort,0,0.013054 ms,
+Merge Sort,100,0.114147 ms,
+Merge Sort,1000,1.36463 ms,
+Merge Sort,10000,16.1863 ms,
+Merge Sort,50000,73.8344 ms,
+Merge Sort,100000,137.306 ms,
+Merge Sort,500000,710.011 ms,
+Merge Sort,1000000,1443.46 ms,
+Merge Sort,5000000,7554.46 ms,
+Merge Sort,10000000,15369.1 ms,
+Selection Sort,10,0.002822 ms,
+Selection Sort,100,0.063442 ms,
+Selection Sort,1000,2.479306 ms,
+Selection Sort,10000,191.582516 ms,
+Selection Sort,50000,4583.866744 ms,
+Selection Sort,100000,18264.210509 ms,
+Selection Sort,500000,"~500,000.00 ms",Estimated (~8.3 mins)
+Selection Sort,1000000,"~2,000,000.00 ms",Estimated (~33.3 mins)
+Selection Sort,5000000,"~50,000,000.00 ms",Estimated (~13.8 hours)
+Selection Sort,10000000,"~200,000,000.00 ms",Estimated (~55.5 hours)
