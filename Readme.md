@@ -1,573 +1,217 @@
 # 🧠 DSA Journey
 
-> A personal repository documenting my journey of learning, implementing, and practicing **Data Structures and Algorithms using C++**.
+> Learning Data Structures & Algorithms by building them from scratch in **C++**.
 
-This repository contains implementations, academic coursework, algorithmic analysis, problem sets, and practice programs developed throughout my study of **Data Structures & Algorithms**.
+![Language](https://img.shields.io/badge/language-C%2B%2B17-blue)
+![Status](https://img.shields.io/badge/status-in%20progress-yellow)
+![Focus](https://img.shields.io/badge/focus-DSA-green)
 
-The goal of this repository is not simply to collect code, but to build a strong understanding of how data structures and algorithms work internally, analyze their efficiency, and improve problem-solving skills through consistent implementation.
+This repository is my running record of studying DSA as a Software Engineering student at IIT, University of Dhaka. It holds hand-written implementations, university coursework, complexity benchmarks, exam-style problem sets, and a few cheat sheets I made along the way.
 
----
-
-## 📌 About This Repository
-
-This repository is a continuously evolving record of my DSA learning journey.
-
-It includes:
-
-- Fundamental data structure implementations
-- Algorithm implementations
-- Recursive problem solving
-- Tree-based data structures
-- Heap implementations
-- Greedy algorithms
-- Sorting algorithms
-- Stack and queue applications
-- Algorithmic analysis and benchmarking
-- University DSA coursework
-- Exam and problem-set solutions
-- Continuous evaluation tasks
-
-Most implementations are written from scratch in **C++** to focus on understanding the underlying logic rather than relying heavily on built-in data structures or algorithms.
+Most code avoids STL containers on purpose, so the internals (pointers, rotations, heapify, partitioning) are written out by hand.
 
 ---
 
-## 🛠️ Language & Tools
+## 📑 Contents
 
-| Tool | Purpose |
-|---|---|
-| **C++** | Primary programming language |
-| **G++ / GCC** | Compilation |
-| **Git** | Version control |
-| **GitHub** | Repository and progress tracking |
+- [Quick Start](#-quick-start)
+- [Topic Index](#-topic-index)
+- [Coursework & Practice](#-coursework--practice)
+- [Algorithmic Analysis](#-algorithmic-analysis)
+- [Resources](#-resources)
+- [Repository Structure](#-repository-structure)
+- [Roadmap](#-roadmap)
+- [Contributing](#-contributing)
 
-### C++ Standard
+---
 
-The implementations are generally intended to work with modern C++ compilers, with **C++17** used where required.
-
-Example:
+## ⚡ Quick Start
 
 ```bash
-g++ -std=c++17 filename.cpp -o program
-./program
+git clone https://github.com/shamsularefin707/dsa-journey.git
+cd dsa-journey
+
+# compile and run any file
+g++ -std=c++17 Sorting/Merge_Sort.cpp -o merge_sort
+./merge_sort
 ```
 
----
-
-# 📚 Topics Covered
-
-## 🔗 Linked Lists
-
-The `LinkedList` directory contains implementations of fundamental linked-list operations.
-
-### Singly Linked List
-
-- Node creation
-- Insert at head
-- Insert at tail
-- Insert at a specific position
-- Delete from head
-- Delete from tail
-- Delete from a specific position
-- Searching
-- Reversing a linked list
-- Merge Sort on Linked List
-- Binary Search
-
-### Doubly Linked List
-
-- Insert at head
-- Insert at tail
-- Insert at a specific position
-- Insert after a value
-- Delete from head
-- Delete from tail
-- Delete from a specific position
-- Delete by value
-- Binary Search
-
-📁 **Directory:** `LinkedList/`
+Each `.cpp` file is self-contained with its own `main()`, so there's no build system to set up.
 
 ---
 
-## 📚 Stack
+## 🗂️ Topic Index
 
-The `Stack` directory contains both implementation and application-based problems involving stacks.
+### Linear Data Structures
 
-### Implementations
+| Topic | Files | What's inside |
+|---|---|---|
+| 🔗 **Linked List** | [`LinkedList/`](LinkedList/) | Singly & doubly linked lists — insert/delete at head, tail, position; search; reverse; merge sort on a list |
+| 📚 **Stack** | [`Stack/`](Stack/) | Array- and linked-list-based stacks; infix → postfix conversion; postfix evaluation |
+| 🚶 **Queue** | [`Queue/`](Queue/) | Linear queue and circular queue (modular indexing) on arrays |
 
-- Stack using Array
-- Stack using Linked List
-- Push
-- Pop
-- Peek
-- Empty-state checking
-- Dynamic memory allocation
+### Trees & Heaps
 
-### Applications
+| Topic | Files | What's inside |
+|---|---|---|
+| 🌳 **Binary Tree** | [`Trees/General_Binary_Tree_*.cpp`](Trees/) | Manual construction, level-order construction (`-1` = null), sideways console visualizer |
+| 🔍 **BST** | [`Trees/BST_*.cpp`](Trees/), `Traversal_BST.cpp`, `Deletion_BST.cpp` | Recursive & iterative BST, traversals, deletion (all three cases) |
+| ⚖️ **AVL Tree** | [`Trees/AVL_1.cpp`](Trees/AVL_1.cpp) | Height-balanced insertion with LL / RR / LR / RL rotations |
+| 🔴⚫ **Red-Black Tree** | [`Trees/Red_Black_Tree.cpp`](Trees/Red_Black_Tree.cpp) | Insertion fix-up, rotations, recoloring |
+| 🏔️ **Heap** | [`Heap/`](Heap/) | Array-based max-heap and min-heap with `heapify` |
 
-- Infix to Postfix conversion
-- Postfix expression evaluation
+### Algorithms
 
-📁 **Directory:** `Stack/`
+| Topic | Files | What's inside |
+|---|---|---|
+| 🔄 **Sorting** | [`Sorting/`](Sorting/) | Selection, Insertion, Merge, Quick, Counting, Radix |
+| 🧠 **Greedy** | [`Greedy/`](Greedy/) | Fractional Knapsack, Activity / Time Scheduling, Huffman Coding (plus an improved version that reads a file and packs real bits) |
+| 🧮 **Dynamic Programming** | [`DP/LCS.cpp`](DP/LCS.cpp) | Longest Common Subsequence with `c`/`b` tables and path reconstruction (CLRS style) |
+| 🗼 **Recursion** | [`TowerOfHanoi/`](TowerOfHanoi/) | Two Tower of Hanoi solutions — explicit auxiliary peg vs. computed auxiliary peg |
 
----
+### Complexity Cheat Sheet
 
-## 🚶 Queue
-
-Queue implementations are based on the **FIFO (First In, First Out)** principle.
-
-### Implementations
-
-- Linear Queue using Array
-- Enqueue
-- Dequeue
-- Peek
-- Traversal
-- Circular Queue using Array
-- Modular arithmetic for circular indexing
-
-📁 **Directory:** `Queue/`
-
----
-
-## 🌳 Trees
-
-The `Trees` directory contains implementations ranging from fundamental binary trees to self-balancing search trees.
-
-### Binary Trees
-
-- Binary Tree construction
-- Manual structural tree generation
-- Level-order traversal
-- Dynamic level-order parsing
-- Console-based tree representation
-
-### Binary Search Trees
-
-- BST construction
-- BST operations
-- BST traversal
-- BST deletion
-
-### AVL Trees
-
-- AVL Tree implementation
-- Self-balancing operations
-
-### Red-Black Trees
-
-- Red-Black Tree implementation
-- Insertion balancing
-- Rotations
-- Recoloring
-- Tree balancing concepts
-
-📁 **Directory:** `Trees/`
+| Algorithm | Best | Average | Worst | Space |
+|---|---|---|---|---|
+| Selection Sort | O(n²) | O(n²) | O(n²) | O(1) |
+| Insertion Sort | O(n) | O(n²) | O(n²) | O(1) |
+| Merge Sort | O(n log n) | O(n log n) | O(n log n) | O(n) |
+| Quick Sort | O(n log n) | O(n log n) | O(n²) | O(log n) |
+| Counting Sort | O(n + k) | O(n + k) | O(n + k) | O(n + k) |
+| Radix Sort | O(d·(n + b)) | O(d·(n + b)) | O(d·(n + b)) | O(n + b) |
+| BST search / insert | O(log n) | O(log n) | O(n) | O(h) |
+| AVL / Red-Black ops | O(log n) | O(log n) | O(log n) | O(h) |
+| Heapify (build heap) | O(n) | O(n) | O(n) | O(1) |
+| Huffman Coding | — | O(n log n) | O(n log n) | O(n) |
+| LCS | O(m·n) | O(m·n) | O(m·n) | O(m·n) |
+| Tower of Hanoi | O(2ⁿ) | O(2ⁿ) | O(2ⁿ) | O(n) |
 
 ---
 
-## 🏔️ Heap
+## 🎓 Coursework & Practice
 
-The `Heap` directory contains implementations of heap-based data structures.
+### 🧪 Continuous Evaluation — [`Continuous_Evaluation/`](Continuous_Evaluation/)
 
-### Implementations
+Weekly lab tasks, most solved both **recursively and iteratively**:
 
-- Max Heap
-- Min Heap
-
-These implementations provide practical understanding of heap structure, ordering properties, and priority-based data organization.
-
-📁 **Directory:** `Heap/`
-
----
-
-## 🔄 Sorting Algorithms
-
-The `Sorting` directory contains implementations of several fundamental sorting algorithms.
-
-| Algorithm | File |
+| Week | Task |
 |---|---|
-| Selection Sort | `Selection_Sort.cpp` |
-| Insertion Sort | `Insertion_Sort.cpp` |
-| Merge Sort | `Merge_Sort.cpp` |
-| Quick Sort | `Quick_Sort.cpp` |
-| Counting Sort | `Counting_Sort.cpp` |
-| Radix Sort | `Radix_Sort.cpp` |
+| 1 | Merge two sorted arrays · Recursive binary search |
+| 2 | Quick Sort & Merge Sort (recursive + iterative) |
+| 3 | Bubble, Selection, Insertion Sort (loop + recursion) |
+| 4 | Infix → Postfix · Postfix evaluation · Quick Sort & Merge Sort using an explicit stack |
+| 5 | Linked list operations |
+| 6 | Build a BST from an array, inorder traversal, search |
+| 7 | BST deletion |
+| Extra | Merge two binary trees (`merge2binaryTrees.cpp`) |
 
-The implementations are intended to help understand the logic, behavior, and complexity of different sorting techniques.
+### 📝 Data Structures Lab — [`DS_Lab_Task_1/`](DS_Lab_Task_1/)
 
-📁 **Directory:** `Sorting/`
+- Rebuild a binary tree from **preorder + inorder** and **postorder + inorder**
+- Convert a binary tree (LCRS) into a general tree
+- Balance a skewed BST with a **Red-Black Tree**, including insertions and deletion
 
----
+### 🧩 Problem Sets — [`ProblemSets/`](ProblemSets/)
 
-## 🧠 Greedy Algorithms
+Scenario-based exam problems (from `CSE201_Data_Structures_Exam_Questions.pdf`), each applying a data structure to a real-world-style task:
 
-The `Greedy` directory contains problems that demonstrate greedy problem-solving strategies.
-
-### Implementations
-
-- Fractional Knapsack
-- Huffman Coding
-- Time Scheduling
-
-📁 **Directory:** `Greedy/`
-
----
-
-## 🗼 Tower of Hanoi
-
-The `TowerOfHanoi` directory contains recursive implementations of the classic **Tower of Hanoi** problem.
-
-The problem demonstrates:
-
-- Recursion
-- Divide-and-conquer thinking
-- Recursive state transitions
-- Mathematical growth of operations
-
-Two different recursive implementations are included for comparison and practice.
-
-📁 **Directory:** `TowerOfHanoi/`
+| Problem | Scenario | Data structures / algorithms |
+|---|---|---|
+| 1.2 | Expression evaluator | Stack |
+| 2.1 | Library catalogue sorting | Hybrid sort with comparison counting |
+| 2.2 | Library range lookup | Binary search |
+| 3.1 | Document editor | Doubly + singly linked lists |
+| 3.2 | Undo / redo + formula evaluator | Stacks |
+| 4.1 | ER triage queue | Min-heap priority queue, circular queue |
+| 4.2 | Patient record sorting | Radix sort, Counting sort |
+| 5.1 | File-system tree (size & height) | First-Child Next-Sibling tree |
+| 5.2 | File index | BST, leaf counting |
+| 6.1 | Balanced index | Red-Black Tree, level-order output |
 
 ---
 
-# 📊 Algorithmic Analysis
+## 📊 Algorithmic Analysis
 
-The `Algorithmic_Analysis` directory contains coursework and experiments related to analyzing algorithm performance.
+[`Algorithmic_Analysis/`](Algorithmic_Analysis/) measures real running times with `<chrono>` to check theory against practice:
 
-It currently includes:
+| Task | Growth rate | Algorithm used |
+|---|---|---|
+| Task 01 | O(n) | Counting Sort |
+| Task 02 | O(2ⁿ) | Tower of Hanoi |
+| Task 03 | O(n log n) | Merge Sort |
+| Task 04 | O(n²) | Selection Sort |
 
-- Algorithmic analysis tasks
-- Multiple C++ task implementations
-- Benchmarking experiments
-- Algorithm benchmark results
-
-📁 **Directory:** `Algorithmic_Analysis/`
-
-The benchmark results are stored in:
-
-```text
-algorithm_benchmark_results.csv
-```
-
-This section focuses on understanding how algorithm performance changes with input size and implementation strategy.
+Results for all runs are collected in [`algorithm_benchmark_results.csv`](Algorithmic_Analysis/algorithm_benchmark_results.csv) (columns: `Algorithm, Input Size, Time, Notes`).
 
 ---
 
-# 🧪 Continuous Evaluation
+## 📎 Resources
 
-The `Continuous_Evaluation` directory contains weekly and continuous-assessment programming tasks.
+[`Random_Resources/`](Random_Resources/) has PDF cheat sheets I put together while studying:
 
-It includes:
-
-- Week-based C++ implementations
-- Binary tree problems
-- Binary tree merging
-- Additional tree-related exercises
-
-📁 **Directory:** `Continuous_Evaluation/`
+- **DSA:** Lecture 1 overview, sorting algorithms (text + visual versions), Huffman / Scheduling / LCS
+- **Statistics:** hypothesis testing, ANOVA, non-parametric tests, regression
 
 ---
 
-# 📝 Data Structures Lab
-
-The `DS_Lab_Task_1` directory contains solutions for university Data Structures laboratory assignments.
-
-Topics include:
-
-- Binary tree reconstruction
-- Preorder + Inorder reconstruction
-- Postorder + Inorder reconstruction
-- Binary Tree to General Tree conversion
-- Red-Black Tree concepts
-- Tree balancing
-- Rotations
-- Recoloring
-
-📁 **Directory:** `DS_Lab_Task_1/`
-
----
-
-# 🧩 Problem Sets
-
-The `ProblemSets` directory contains additional DSA problems and practice solutions.
-
-It includes:
-
-- C++ problem-solving exercises
-- Numbered problem sets
-- University examination-related problems
-- A collection of Data Structures exam questions
-
-📁 **Directory:** `ProblemSets/`
-
----
-
-# 📁 Repository Structure
+## 📁 Repository Structure
 
 ```text
 dsa-journey/
-│
-├── Algorithmic_Analysis/
-│   ├── Task_01/
-│   ├── Task_02.cpp
-│   ├── Task_03.cpp
-│   ├── Task_04.cpp
-│   └── algorithm_benchmark_results.csv
-│
-├── Continuous_Evaluation/
-│   ├── merge2binaryTrees.cpp
-│   ├── mergeBT/
-│   ├── week-1_1.cpp
-│   ├── week-1_2.cpp
-│   ├── week-2_1.cpp
-│   ├── week-2_2.cpp
-│   ├── week-3_1.cpp
-│   ├── week-3_2.cpp
-│   ├── week-3_3.cpp
-│   ├── week-4_1.cpp
-│   ├── week-4_2.cpp
-│   ├── week-4_3.cpp
-│   ├── week-4_4.cpp
-│   ├── week-5.cpp
-│   ├── week-6.cpp
-│   └── week-7.cpp
-│
-├── DS_Lab_Task_1/
-│   ├── DS_Task_1_a.cpp
-│   ├── DS_Task_1_b.cpp
-│   ├── DS_Task_2.cpp
-│   ├── DS_Task_3a.cpp
-│   ├── DS_Task_3b.cpp
-│   ├── DS_Task_4.cpp
-│   └── Readme.md
-│
-├── Greedy/
-│   ├── Fractional_Knapsack.cpp
-│   ├── Huffman_Coding.cpp
-│   ├── Time_Scheduling.cpp
-│   └── Time_Scheduling_1.cpp
-│
-├── Heap/
-│   ├── Max_Heap.cpp
-│   └── Min_Heap.cpp
-│
-├── LinkedList/
-│   ├── SinglyLinkedList.cpp
-│   ├── DoublyLinkedList.cpp
-│   └── Readme.md
-│
-├── ProblemSets/
-│   ├── CSE201_Data_Structures_Exam_Questions.pdf
-│   ├── Problem_1_2.cpp
-│   ├── Problem_2_1.cpp
-│   ├── Problem_2_2.cpp
-│   ├── Problem_3_1.cpp
-│   ├── Problem_3_2.cpp
-│   ├── Problem_4_1.cpp
-│   ├── Problem_4_2.cpp
-│   ├── Problem_5_1.cpp
-│   ├── Problem_5_2.cpp
-│   ├── Problem_6_1.cpp
-│   └── Readme.md
-│
-├── Queue/
-│   ├── LinearQueue_Array.cpp
-│   ├── CircularQueue_Array.cpp
-│   └── Readme.md
-│
-├── Sorting/
-│   ├── Selection_Sort.cpp
-│   ├── Insertion_Sort.cpp
-│   ├── Merge_Sort.cpp
-│   ├── Quick_Sort.cpp
-│   ├── Counting_Sort.cpp
-│   └── Radix_Sort.cpp
-│
-├── Stack/
-│   ├── StackUsingArray.cpp
-│   ├── StackUsingLinkedList.cpp
-│   ├── InfixToPostfix.cpp
-│   ├── PostfixEvaluation.cpp
-│   └── Readme.md
-│
-├── TowerOfHanoi/
-│   ├── TowerOfHanoi_1.cpp
-│   ├── TowerOfHanoi_2.cpp
-│   └── README.md
-│
-├── Trees/
-│   ├── General_Binary_Tree_1.cpp
-│   ├── General_Binary_Tree_2.cpp
-│   ├── BST_1.cpp
-│   ├── BST_2.cpp
-│   ├── BST_3.cpp
-│   ├── Traversal_BST.cpp
-│   ├── Deletion_BST.cpp
-│   ├── AVL_1.cpp
-│   ├── Red_Black_Tree.cpp
-│   └── Readme.md
-│
+├── Algorithmic_Analysis/    # chrono-based benchmarks + CSV results
+├── Continuous_Evaluation/   # weekly lab tasks (week-1 … week-7)
+├── DP/                      # dynamic programming (LCS)
+├── DS_Lab_Task_1/           # tree reconstruction, LCRS, Red-Black lab
+├── Greedy/                  # knapsack, scheduling, Huffman
+├── Heap/                    # max-heap, min-heap
+├── LinkedList/              # singly & doubly linked lists
+├── ProblemSets/             # scenario-based exam problems + question PDF
+├── Queue/                   # linear & circular queues
+├── Random_Resources/        # PDF cheat sheets (DSA + statistics)
+├── Sorting/                 # six sorting algorithms
+├── Stack/                   # stack implementations & applications
+├── TowerOfHanoi/            # two recursive approaches
+├── Trees/                   # binary tree, BST, AVL, Red-Black
 └── Readme.md
 ```
 
----
-
-# 🎯 Learning Objectives
-
-Through this repository, I am working toward developing a stronger understanding of:
-
-- Data structure fundamentals
-- Algorithm design
-- Recursion
-- Pointer manipulation
-- Dynamic memory allocation
-- Tree structures
-- Searching and sorting
-- Algorithmic complexity
-- Problem-solving techniques
-- Competitive programming fundamentals
-- Writing clean and understandable C++ implementations
+Several folders have their own `Readme.md` with deeper notes on that topic.
 
 ---
 
-# 📈 Progress
+## 🗺️ Roadmap
 
-This repository is a **work in progress**.
-
-New implementations, coursework, problems, and experiments will continue to be added as I progress through Data Structures & Algorithms.
-
-### Current Areas
-
-- [x] Linked Lists
-- [x] Stacks
-- [x] Queues
-- [x] Sorting Algorithms
-- [x] Binary Trees
-- [x] Binary Search Trees
-- [x] AVL Trees
-- [x] Red-Black Trees
+- [x] Linked Lists, Stacks, Queues
+- [x] Sorting (comparison + non-comparison)
+- [x] Binary Trees, BST, AVL, Red-Black Trees
 - [x] Heaps
 - [x] Greedy Algorithms
-- [x] Recursion / Tower of Hanoi
-- [x] Algorithmic Analysis
-- [x] DSA Coursework
-- [x] Problem Sets
-- [ ] Graph Algorithms
-- [ ] Advanced Dynamic Programming
-- [ ] More Competitive Programming Problems
-
-> The checklist represents the current state of the repository and will evolve as new topics are studied and implemented.
-
----
-
-# 💡 Philosophy
-
-The purpose of this repository is to **learn by implementing**.
-
-Instead of only reading about a data structure or algorithm, I try to understand its internal mechanics by writing the implementation myself.
-
-The general workflow is:
-
-```text
-Learn the concept
-      ↓
-Understand the underlying logic
-      ↓
-Implement from scratch
-      ↓
-Test the implementation
-      ↓
-Analyze complexity
-      ↓
-Solve related problems
-      ↓
-Improve the implementation
-```
+- [x] Recursion
+- [x] Intro to Dynamic Programming (LCS)
+- [x] Empirical complexity analysis
+- [ ] Graphs — BFS, DFS, topological sort
+- [ ] Shortest paths — Dijkstra, Bellman-Ford, Floyd-Warshall
+- [ ] Minimum Spanning Trees — Kruskal, Prim
+- [ ] More DP — 0/1 Knapsack, Matrix Chain Multiplication, Edit Distance
+- [ ] Backtracking
+- [ ] Hashing
+- [ ] Competitive programming problems
 
 ---
 
-# 🚀 Future Plans
+## 🤝 Contributing
 
-The repository will gradually expand toward more advanced DSA topics, including:
+This is a personal learning repo, but corrections are welcome. If you find a bug, a wrong complexity claim, or a cleaner approach, feel free to open an **Issue** or a **Pull Request**.
 
-- Graphs
-- BFS & DFS
-- Shortest Path Algorithms
-- Minimum Spanning Trees
-- Dynamic Programming
-- Backtracking
-- Advanced Greedy Problems
-- Advanced Tree Problems
-- Competitive Programming Problems
-- More algorithm benchmarking
-- Improved documentation and explanations
-
----
-
-# 📖 How to Use This Repository
-
-If you are learning DSA yourself, a good way to use this repository is to follow the topics progressively:
-
-```text
-Foundations
-    ↓
-Linked Lists
-    ↓
-Stacks & Queues
-    ↓
-Sorting
-    ↓
-Trees
-    ↓
-Heaps
-    ↓
-Greedy Algorithms
-    ↓
-Advanced Algorithms
-    ↓
-Problem Solving
-```
-
-Try understanding the concept first, then inspect the implementation.
-
-Do not simply copy the code. That defeats the entire purpose of learning DSA and turns the repository into an unusually elaborate photocopier.
-
----
-
-# 🤝 Contributions
-
-This is primarily a personal learning repository, but suggestions, corrections, alternative approaches, and improvements are welcome.
-
-If you notice:
-
-- An incorrect implementation
-- A logical issue
-- An inefficient approach
-- A documentation error
-- A better algorithmic solution
-
-feel free to open an **Issue** or submit a **Pull Request**.
-
----
-
-# ⭐ Acknowledgment
-
-This repository represents an ongoing learning process rather than a finished DSA library.
-
-The implementations may evolve as my understanding improves, and older solutions may be revisited and optimized over time.
+If you're learning DSA yourself: read the concept first, try writing it on your own, and only then compare with the code here. Copying it won't teach you much.
 
 ---
 
 ## 👨‍💻 Author
 
-**Arefin**
+**Md. Shamsul Arefin**
+Software Engineering student · Institute of Information Technology, University of Dhaka
 
-Software Engineering Student  
-Learning **C++ • Data Structures • Algorithms • Problem Solving**
-
----
+GitHub: [@shamsularefin707](https://github.com/shamsularefin707)
 
 > **Learn → Implement → Analyze → Practice → Improve**
-
-**The journey continues. 🚀**
